@@ -17,3 +17,4 @@ class Config:
     METRICS_PATH = ASSETS_PATH / 'train_metrics.json'
     VAL_METRICS_PATH = ASSETS_PATH / 'val_metrics.json'
     TEST_METRICS_PATH = ASSETS_PATH / 'test_metrics.json'
+    IMAGE_PATH = ASSETS_PATH / 'images'

@@ -7,7 +7,7 @@ with open('params.yaml') as f:
     params = yaml.safe_load(f)['featurize']
 
 #======================================================
-# importing files
+# Importing files
 #======================================================
 
 Config.FEATURES_PATH.mkdir(parents=True, exist_ok=True)
@@ -20,14 +20,15 @@ rul_test = pd.read_csv(Config.RUL_FILE, sep = '\s+', header = None, names = ['ru
 
 
 #======================================================
-# defining features
+# Defining features
 #======================================================
 
+to_keep = params['to_keep']
 df_train = add_rul(df_train)
-train_features = df_train[params['sensor_names']]
+train_features = df_train[to_keep]
 train_labels = df_train.rul
 
-test_features = df_test.groupby('unit_nr').last()[params['sensor_names']]
+test_features = df_test.groupby('unit_nr').last()[to_keep]
 test_labels = rul_test
 
 #======================================================
