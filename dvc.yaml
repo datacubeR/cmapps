@@ -1,0 +1,31 @@
+stages:
+  featurize:
+    cmd: python src/01-featurize.py
+    deps:
+    - src/01-featurize.py
+    params:
+    - featurize
+    - import
+    outs:
+    - assets/features
+  train:
+    cmd: python src/02-train.py
+    deps:
+    - assets/features
+    - src/02-train.py
+    params:
+    - train
+    outs:
+    - assets/models
+    metrics:
+    - assets/val_metrics.json:
+        cache: false
+  evaluate:
+    cmd: python src/03-evaluate.py
+    deps:
+    - assets/features
+    - assets/models
+    - src/03-evaluate.py
+    metrics:
+    - assets/test_metrics.json:
+        cache: false
