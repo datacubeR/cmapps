@@ -21,7 +21,7 @@ def plot_oof(y, y_pred, figsize = (5,5), s = 2, path = None):
     if path is None:
         plt.show()
     else:
-        plt.savefig(path)
+        plt.savefig(path, bbox_inches='tight')
         plt.close()
         
         
@@ -34,6 +34,6 @@ def plot_importance(model, variable_names, path = None):
     if path is None:
         plt.show()
     else:
-        plt.savefig(path)
+        plt.savefig(path, bbox_inches='tight')
         plt.close()
     

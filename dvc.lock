@@ -101,12 +101,12 @@ stages:
       size: 1408
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: 8e05f92b95e79d393a192d7958b4f1c0
-      size: 1309
+      md5: dd9d25ee36a504db7f32ee36debb4a73
+      size: 1257
     outs:
     - path: assets/images
-      md5: 24e14d798c6368bda4fe0b1ecf2ae63d.dir
-      size: 40087
+      md5: 5cdfd402f266295eeb1d28c818cb4215.dir
+      size: 39441
       nfiles: 2
     - path: assets/test_metrics.json
       md5: 494cd5a69741e9b1b14b1901043c15dd
