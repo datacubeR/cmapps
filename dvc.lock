@@ -39,9 +39,6 @@ stages:
           - s_20
           - s_21
           to_keep:
-          - setting_1
-          - setting_2
-          - setting_3
           - s_2
           - s_3
           - s_4
@@ -63,15 +60,15 @@ stages:
           rul_name: RUL_FD001.txt
     outs:
     - path: assets/features
-      md5: cad28ecf0fa90688ba455e7a42100fca.dir
-      size: 2667697
+      md5: 15551aed5921dea661befd4b0310741b.dir
+      size: 2241486
       nfiles: 4
   train:
     cmd: python src/02-train.py
     deps:
     - path: assets/features
-      md5: cad28ecf0fa90688ba455e7a42100fca.dir
-      size: 2667697
+      md5: 15551aed5921dea661befd4b0310741b.dir
+      size: 2241486
       nfiles: 4
     - path: src/02-train.py
       md5: 358cc1e43378985cfb8de2f3be27e536
@@ -83,31 +80,31 @@ stages:
           n_split: 5
     outs:
     - path: assets/models
-      md5: 51ee6f96f434f4feb3e1df2d7c282180.dir
-      size: 1408
+      md5: 82fa498def6d585326c160e8a81dd377.dir
+      size: 1320
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: a1094eea0f2da05ef388bf4fcbc005d5
-      size: 108
+      md5: 799cd167f8be634e0c415fb3106211c0
+      size: 109
   evaluate:
     cmd: python src/03-evaluate.py
     deps:
     - path: assets/features
-      md5: cad28ecf0fa90688ba455e7a42100fca.dir
-      size: 2667697
+      md5: 15551aed5921dea661befd4b0310741b.dir
+      size: 2241486
       nfiles: 4
     - path: assets/models
-      md5: 51ee6f96f434f4feb3e1df2d7c282180.dir
-      size: 1408
+      md5: 82fa498def6d585326c160e8a81dd377.dir
+      size: 1320
       nfiles: 1
     - path: src/03-evaluate.py
       md5: dd9d25ee36a504db7f32ee36debb4a73
       size: 1257
     outs:
     - path: assets/images
-      md5: 5cdfd402f266295eeb1d28c818cb4215.dir
-      size: 39441
+      md5: 66ebb4fc8cd0dbfb4b9db4aba709c769.dir
+      size: 38640
       nfiles: 2
     - path: assets/test_metrics.json
-      md5: 494cd5a69741e9b1b14b1901043c15dd
+      md5: e9526ad6cf4e139a3f9f04f1e5b62a49
       size: 107
