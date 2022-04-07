@@ -4,8 +4,8 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - path: src/01-featurize.py
-      md5: 5ff2efebd81468c1b1abf078d36e476b
-      size: 1478
+      md5: c0e73451e95e8cef4cd7a1075d65db61
+      size: 1511
     params:
       params.yaml:
         featurize:
@@ -54,20 +54,21 @@ stages:
           - s_17
           - s_20
           - s_21
+          rul_clip: 125
         import:
           train_name: train_FD001.txt
           test_name: test_FD001.txt
           rul_name: RUL_FD001.txt
     outs:
     - path: assets/features
-      md5: 15551aed5921dea661befd4b0310741b.dir
+      md5: 484b218deb8c078a109fda9ac993a2c0.dir
       size: 2241486
       nfiles: 4
   train:
     cmd: python src/02-train.py
     deps:
     - path: assets/features
-      md5: 15551aed5921dea661befd4b0310741b.dir
+      md5: 484b218deb8c078a109fda9ac993a2c0.dir
       size: 2241486
       nfiles: 4
     - path: src/02-train.py
@@ -80,21 +81,21 @@ stages:
           n_split: 5
     outs:
     - path: assets/models
-      md5: 82fa498def6d585326c160e8a81dd377.dir
+      md5: 9bfc165343cb1cf27ebf7d273deab2c9.dir
       size: 1320
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: 799cd167f8be634e0c415fb3106211c0
-      size: 109
+      md5: cc8969dfcb1815e16c0be14148671306
+      size: 107
   evaluate:
     cmd: python src/03-evaluate.py
     deps:
     - path: assets/features
-      md5: 15551aed5921dea661befd4b0310741b.dir
+      md5: 484b218deb8c078a109fda9ac993a2c0.dir
       size: 2241486
       nfiles: 4
     - path: assets/models
-      md5: 82fa498def6d585326c160e8a81dd377.dir
+      md5: 9bfc165343cb1cf27ebf7d273deab2c9.dir
       size: 1320
       nfiles: 1
     - path: src/03-evaluate.py
@@ -102,9 +103,9 @@ stages:
       size: 1257
     outs:
     - path: assets/images
-      md5: 66ebb4fc8cd0dbfb4b9db4aba709c769.dir
-      size: 38640
+      md5: 70873b67c63161a4b2bb45273f8a09de.dir
+      size: 43715
       nfiles: 2
     - path: assets/test_metrics.json
-      md5: e9526ad6cf4e139a3f9f04f1e5b62a49
-      size: 107
+      md5: 006a1b8931a3d22d8f51b3d4e311509d
+      size: 104
