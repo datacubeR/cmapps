@@ -18,7 +18,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          dvc pull ./assets/images/Feature_Importance.png ./assets/images/F_vs_t.png
+          dvc pull ./assets/images/Prediction_Hist.png ./assets/images/F_vs_t.png
       - name: Create CML Report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,5 +31,8 @@ jobs:
           
           echo "##  True vs Fitted Curve" >> report.md
           cml publish ./assets/images/F_vs_t.png --md >> report.md
+
+          echo "##  Prediction Histogram" >> report.md
+          cml publish ./assets/images/Prediction_Hist.png --md >> report.md
           
           cml send-comment report.md

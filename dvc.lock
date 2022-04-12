@@ -80,14 +80,15 @@ stages:
       size: 17047397
       nfiles: 4
     - path: src/02-train.py
-      md5: 179358b3d28b8290bf2824d0e10d3f1d
-      size: 2719
+      md5: 68e5342e3dfe9c9e398fb99df64385f3
+      size: 2840
     params:
       params.yaml:
         train:
           model_name: model.joblib
           n_split: 5
           rul_clip: 125
+          pred_clip: 1
           standardize: true
     outs:
     - path: assets/models
@@ -95,7 +96,7 @@ stages:
       size: 8991
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: 61968e79495e5d1730faf51e00a6cc65
+      md5: cfcf31d3fe95b9d965e99dd4efdf0091
       size: 108
   evaluate:
     cmd: python src/03-evaluate.py
@@ -109,13 +110,13 @@ stages:
       size: 8991
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: e877823d9f79800b628719278a4c9406
-      size: 1314
+      md5: fae2b93433ad215746fe029f10f097af
+      size: 1568
     outs:
     - path: assets/images
-      md5: 84a5b77fc11cc306cc2071b3167630c1.dir
-      size: 24424
-      nfiles: 1
+      md5: d21683c956c83df791069fb678cd5c59.dir
+      size: 40442
+      nfiles: 2
     - path: assets/test_metrics.json
-      md5: fe26179c5a1a0fb155e121b93040a084
+      md5: b32442e41dc139943d1ddb66312c9b89
       size: 106

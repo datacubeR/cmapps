@@ -37,6 +37,18 @@ def plot_importance(model, variable_names, path = None, top_n = 10):
     else:
         plt.savefig(path, bbox_inches='tight')
         plt.close()
+        
+def plot_prediction_hist(y_pred, figsize = (5,5), bins = 10, path = None):
+    plt.figure(figsize=figsize)
+    plt.hist(y_pred, bins = bins)
+    plt.xlabel('Predicted Value')
+    plt.ylabel('Frequency')
+    plt.title('Prediction Histogram')
+    if path is None:
+        plt.show()
+    else:
+        plt.savefig(path, bbox_inches='tight')
+        plt.close()
     
 
 def create_features(df_train, df_test, params):

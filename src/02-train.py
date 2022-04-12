@@ -46,8 +46,11 @@ for fold_, (train_idx, val_idx) in enumerate(folds.split(X = train_features, y =
     X_train, X_val = train_features.iloc[train_idx], train_features.iloc[val_idx]
     y_train, y_val = train_labels.iloc[train_idx], train_labels.iloc[val_idx]
     
+    # Training Clipping
     model.fit(X_train, y_train.clip(upper = params['rul_clip']))
-    val_preds = model.predict(X_val)
+    
+    # Adding Prediction Clipping (Numpy)
+    val_preds = model.predict(X_val).clip(min = params['pred_clip'])
     val_mae = mean_absolute_error(y_val, val_preds)
     val_rmse = mean_squared_error(y_val, val_preds, squared=False)
     val_r2 = r2_score(y_val, val_preds)
@@ -73,5 +76,6 @@ with open(Config.VAL_METRICS_PATH, 'w') as outfile:
 # Retrain Model
 #======================================================
 log.info('Model Retraining')
+#Training Clipping
 model.fit(train_features, train_labels.clip(upper = params['rul_clip']))
 joblib.dump(model, Config.MODELS_PATH / params['model_name'])
