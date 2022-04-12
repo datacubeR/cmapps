@@ -1,7 +1,8 @@
+from catboost import train
 import pandas as pd
 from config import Config
 import yaml
-from utils import add_rul
+from utils import add_rul, create_features
 
 with open('params.yaml') as f:
     params = yaml.safe_load(f)['featurize']
@@ -20,15 +21,23 @@ rul_test = pd.read_csv(Config.RUL_FILE, sep = '\s+', header = None, names = ['ru
 
 
 #======================================================
-# Defining features
+# Defining Features
 #======================================================
 
 to_keep = params['to_keep']
 df_train = add_rul(df_train)
 train_features = df_train[to_keep]
-train_labels = df_train.rul
-
 test_features = df_test.groupby('unit_nr').last()[to_keep]
+
+train_features, test_features = create_features(train_features, 
+                                                test_features, 
+                                                )
+
+#======================================================
+# Defining Labels
+#======================================================
+
+train_labels = df_train.rul
 test_labels = rul_test
 
 #======================================================

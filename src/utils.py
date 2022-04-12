@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+from sklearn.preprocessing import PolynomialFeatures
 sns.set()
 
 def add_rul(df):
@@ -25,10 +26,10 @@ def plot_oof(y, y_pred, figsize = (5,5), s = 2, path = None):
         plt.close()
         
         
-def plot_importance(model, variable_names, path = None):
+def plot_importance(model, variable_names, path = None, top_n = 10):
     ax =(pd.Series(model.coef_.ravel(), 
                 index = variable_names)
-        .sort_values(ascending=False)
+        .sort_values(ascending=False).head(top_n)
         .plot(kind = 'bar', title = 'Variable Importance'))
     
     if path is None:
@@ -36,4 +37,19 @@ def plot_importance(model, variable_names, path = None):
     else:
         plt.savefig(path, bbox_inches='tight')
         plt.close()
+    
+
+def create_features(df_train, df_test, params = None):
+    pf = PolynomialFeatures(interaction_only=True)
+    
+    
+    # TODO Introducir missing values
+    
+    ###
+    
+    
+    df_train = pd.DataFrame(pf.fit_transform(df_train), columns = pf.get_feature_names_out())
+    df_test = pd.DataFrame(pf.fit_transform(df_test), columns = pf.get_feature_names_out())
+    
+    return df_train, df_test
     
