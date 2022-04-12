@@ -4,8 +4,8 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - path: src/01-featurize.py
-      md5: a0a2e745c49ba450ec3d0a3a815ff71b
-      size: 1480
+      md5: 795ffb5bcc2c6babbca0a2d280a0a680
+      size: 1565
     params:
       params.yaml:
         featurize:
@@ -38,53 +38,84 @@ stages:
           - s_19
           - s_20
           - s_21
+          to_keep:
+          - s_2
+          - s_3
+          - s_4
+          - s_6
+          - s_7
+          - s_8
+          - s_9
+          - s_11
+          - s_12
+          - s_13
+          - s_14
+          - s_15
+          - s_17
+          - s_20
+          - s_21
+          lags:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 10
+          - 20
+          - 30
         import:
           train_name: train_FD001.txt
           test_name: test_FD001.txt
           rul_name: RUL_FD001.txt
     outs:
     - path: assets/features
-      md5: cc5a60cce241b036ab0773df32dd6f57.dir
-      size: 2925665
+      md5: df7148eac0fe1c20565954d0da44d026.dir
+      size: 17047397
       nfiles: 4
   train:
     cmd: python src/02-train.py
     deps:
     - path: assets/features
-      md5: cc5a60cce241b036ab0773df32dd6f57.dir
-      size: 2925665
+      md5: df7148eac0fe1c20565954d0da44d026.dir
+      size: 17047397
       nfiles: 4
     - path: src/02-train.py
-      md5: 358cc1e43378985cfb8de2f3be27e536
-      size: 2404
+      md5: 179358b3d28b8290bf2824d0e10d3f1d
+      size: 2719
     params:
       params.yaml:
         train:
           model_name: model.joblib
           n_split: 5
+          rul_clip: 125
+          standardize: true
     outs:
     - path: assets/models
-      md5: dbc73b86bea366569242fe67fb0a02a9.dir
-      size: 1472
+      md5: 104ed2585cd9a391f870fa7a1e5affd8.dir
+      size: 8991
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: 1e96b4572f593ed6f96f4538e9abb09c
+      md5: 61968e79495e5d1730faf51e00a6cc65
       size: 108
   evaluate:
     cmd: python src/03-evaluate.py
     deps:
     - path: assets/features
-      md5: cc5a60cce241b036ab0773df32dd6f57.dir
-      size: 2925665
+      md5: df7148eac0fe1c20565954d0da44d026.dir
+      size: 17047397
       nfiles: 4
     - path: assets/models
-      md5: dbc73b86bea366569242fe67fb0a02a9.dir
-      size: 1472
+      md5: 104ed2585cd9a391f870fa7a1e5affd8.dir
+      size: 8991
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: 8c8f8393838e73af2d82f4ef8e0caa74
-      size: 767
+      md5: e877823d9f79800b628719278a4c9406
+      size: 1314
     outs:
+    - path: assets/images
+      md5: 84a5b77fc11cc306cc2071b3167630c1.dir
+      size: 24424
+      nfiles: 1
     - path: assets/test_metrics.json
-      md5: 9062147e63f36423b536917a9e77d270
-      size: 105
+      md5: fe26179c5a1a0fb155e121b93040a084
+      size: 106

@@ -1,13 +1,13 @@
 import pandas as pd
 from config import Config
 import yaml
-from utils import add_rul
+from utils import add_rul, create_features
 
 with open('params.yaml') as f:
     params = yaml.safe_load(f)['featurize']
 
 #======================================================
-# importing files
+# Importing files
 #======================================================
 
 Config.FEATURES_PATH.mkdir(parents=True, exist_ok=True)
@@ -20,15 +20,16 @@ rul_test = pd.read_csv(Config.RUL_FILE, sep = '\s+', header = None, names = ['ru
 
 
 #======================================================
-# defining features
+# Defining Features and Labels
 #======================================================
-
-df_train = add_rul(df_train)
-train_features = df_train[params['sensor_names']]
-train_labels = df_train.rul
-
-test_features = df_test.groupby('unit_nr').last()[params['sensor_names']]
 test_labels = rul_test
+
+#creates rul
+df_train = add_rul(df_train)
+train_features, test_features, train_labels = create_features(df_train, 
+                                                df_test, 
+                                                params = params) 
+
 
 #======================================================
 # Export Files
@@ -39,5 +40,4 @@ train_labels.to_csv(Config.FEATURES_PATH / 'train_labels.csv', index = None)
 
 test_features.to_csv(Config.FEATURES_PATH / 'test_features.csv', index = None)
 test_labels.to_csv(Config.FEATURES_PATH / 'test_labels.csv', index = None)
-
 
