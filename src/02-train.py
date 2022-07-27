@@ -1,4 +1,3 @@
-from xgboost import train
 from config import Config
 import pandas as pd
 

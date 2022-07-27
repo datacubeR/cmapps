@@ -4,8 +4,8 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - path: src/01-featurize.py
-      md5: a0a2e745c49ba450ec3d0a3a815ff71b
-      size: 1480
+      md5: 36ce11335e250b2764cbc115adf80838
+      size: 1477
     params:
       params.yaml:
         featurize:
@@ -55,8 +55,8 @@ stages:
       size: 2925665
       nfiles: 4
     - path: src/02-train.py
-      md5: 358cc1e43378985cfb8de2f3be27e536
-      size: 2404
+      md5: 39734dfa00427c8d41ed327a26cc46d7
+      size: 2378
     params:
       params.yaml:
         train:
@@ -82,8 +82,8 @@ stages:
       size: 1472
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: 8c8f8393838e73af2d82f4ef8e0caa74
-      size: 767
+      md5: 061e59dc957b0236d916da39668efb0d
+      size: 1013
     outs:
     - path: assets/test_metrics.json
       md5: 9062147e63f36423b536917a9e77d270

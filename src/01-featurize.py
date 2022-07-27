@@ -39,5 +39,3 @@ train_labels.to_csv(Config.FEATURES_PATH / 'train_labels.csv', index = None)
 
 test_features.to_csv(Config.FEATURES_PATH / 'test_features.csv', index = None)
 test_labels.to_csv(Config.FEATURES_PATH / 'test_labels.csv', index = None)
-
-

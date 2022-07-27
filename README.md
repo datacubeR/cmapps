@@ -2,8 +2,7 @@
 
 El siguiente proyecto contempla investigación de distintos algoritmos utilizando CMAPPS Dataset.
 
-El proyecto actualmente considera un modelo baseline que es una Regresión Logística automatizado con DVC.
-
+El proyecto actualmente considera un modelo baseline que es una Regresión Lineal automatizado con DVC.
 El proyecto considera lo siguiente:
 
 ```shell

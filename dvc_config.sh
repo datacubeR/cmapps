@@ -10,7 +10,7 @@ dvc run --no-exec -n train \
 -d src/02-train.py \
 -d assets/features \
 -p train \
--o assets/model \
+-o assets/models \
 -M assets/val_metrics.json \
 python src/02-train.py
 
