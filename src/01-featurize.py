@@ -1,4 +1,3 @@
-from catboost import train
 import pandas as pd
 from config import Config
 import yaml
@@ -30,8 +29,7 @@ train_features = df_train[to_keep]
 test_features = df_test.groupby('unit_nr').last()[to_keep]
 
 train_features, test_features = create_features(train_features, 
-                                                test_features, 
-                                                )
+                                                test_features)
 
 #======================================================
 # Defining Labels

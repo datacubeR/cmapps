@@ -4,8 +4,8 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - path: src/01-featurize.py
-      md5: 48512caa0a7ee470ce438935e5537f33
-      size: 1833
+      md5: 3321178ae2f4fa2fab0f73da26a6feb8
+      size: 1755
     params:
       params.yaml:
         featurize:
@@ -78,15 +78,15 @@ stages:
         train:
           model_name: model.joblib
           n_split: 5
-          rul_clip: 125
+          rul_clip: 50
     outs:
     - path: assets/models
-      md5: 6b0f99e215a5513fbbb9083bcd0be533.dir
+      md5: d900cfa1a7705a9613e8238b3f9bfa0d.dir
       size: 4598
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: 71d35264a1909f9fdeb2d0dfee84973c
-      size: 107
+      md5: d2b41072f2626900e4e440432d4fd376
+      size: 108
   evaluate:
     cmd: python src/03-evaluate.py
     deps:
@@ -95,17 +95,17 @@ stages:
       size: 33378735
       nfiles: 4
     - path: assets/models
-      md5: 6b0f99e215a5513fbbb9083bcd0be533.dir
+      md5: d900cfa1a7705a9613e8238b3f9bfa0d.dir
       size: 4598
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: dd9d25ee36a504db7f32ee36debb4a73
-      size: 1257
+      md5: 9d6df2b62e21d51e3ec25abd7e18cf41
+      size: 1149
     outs:
     - path: assets/images
-      md5: 3fcedb256bc209a219fbd22f76f67983.dir
-      size: 45746
-      nfiles: 2
+      md5: a6ecb6f6849bb10cc3970362722e5531.dir
+      size: 24157
+      nfiles: 1
     - path: assets/test_metrics.json
-      md5: 9468b43b6a617b4147e35dbbeeb9de28
-      size: 104
+      md5: 4f7a8ba2c6005d02ac82481ddc782dba
+      size: 106

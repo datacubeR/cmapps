@@ -16,4 +16,4 @@ featurize:
 train:
   model_name: model.joblib
   n_split: 5
-  rul_clip: 125
+  rul_clip: 50
