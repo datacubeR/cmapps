@@ -39,11 +39,22 @@ def plot_importance(model, variable_names, path = None, top_n = 10):
         plt.close()
     
 
-def create_features(df_train, df_test, params = None):
-    pf = PolynomialFeatures(interaction_only=True)
+def create_features(df_train, df_test, params, seq_length = 4):
     
-    df_train = pd.DataFrame(pf.fit_transform(df_train), columns = pf.get_feature_names_out())
-    df_test = pd.DataFrame(pf.fit_transform(df_test), columns = pf.get_feature_names_out())
+    to_keep = params['to_keep']
+    lag_features = []
+    for lag in params['lags']:
+        
+        cols = [col + f'_lag_{lag}' for col in to_keep]
+        lag_features.extend(cols)
+        df_train[cols] = df_train.groupby('unit_nr')[to_keep].shift(lag)
+        df_test[cols] = df_test.groupby('unit_nr')[to_keep].shift(lag)
     
-    return df_train, df_test
+    df_train.dropna(inplace = True)
+    df_test.dropna(inplace = True)
+    
+    # selecting last instance to predict
+    df_test = df_test.groupby('unit_nr').tail(seq_length).reset_index(drop=True)
+
+    return df_train[to_keep + lag_features + ['unit_nr']], df_test[to_keep + lag_features + ['unit_nr']], df_train.rul
     

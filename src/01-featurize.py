@@ -20,16 +20,24 @@ rul_test = pd.read_csv(Config.RUL_FILE, sep = '\s+', header = None, names = ['ru
 
 
 #======================================================
-# Defining Features and Labels
+# Defining Features
 #======================================================
-test_labels = rul_test
 
-#creates rul
+# to_keep = params['to_keep']
 df_train = add_rul(df_train)
+# train_features = df_train[to_keep]
+# test_features = df_test.groupby('unit_nr').last()[to_keep]
+
 train_features, test_features, train_labels = create_features(df_train, 
                                                 df_test, 
-                                                params = params) 
+                                                params = params)
 
+#======================================================
+# Defining Labels
+#======================================================
+
+train_labels = df_train.rul
+test_labels = rul_test
 
 #======================================================
 # Export Files
@@ -40,4 +48,5 @@ train_labels.to_csv(Config.FEATURES_PATH / 'train_labels.csv', index = None)
 
 test_features.to_csv(Config.FEATURES_PATH / 'test_features.csv', index = None)
 test_labels.to_csv(Config.FEATURES_PATH / 'test_labels.csv', index = None)
+
 
