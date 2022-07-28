@@ -37,35 +37,13 @@ def plot_importance(model, variable_names, path = None, top_n = 10):
     else:
         plt.savefig(path, bbox_inches='tight')
         plt.close()
-        
-def plot_prediction_hist(y_pred, figsize = (5,5), bins = 10, path = None):
-    plt.figure(figsize=figsize)
-    plt.hist(y_pred, bins = bins)
-    plt.xlabel('Predicted Value')
-    plt.ylabel('Frequency')
-    plt.title('Prediction Histogram')
-    if path is None:
-        plt.show()
-    else:
-        plt.savefig(path, bbox_inches='tight')
-        plt.close()
     
 
-def create_features(df_train, df_test, params):
+def create_features(df_train, df_test, params = None):
+    pf = PolynomialFeatures(interaction_only=True)
     
-    to_keep = params['to_keep']
-    lag_features = []
-    for lag in params['lags']:
-        
-        cols = [col + f'_lag_{lag}' for col in to_keep]
-        lag_features.extend(cols)
-        df_train[cols] = df_train.groupby('unit_nr')[to_keep].shift(lag)
-        df_test[cols] = df_test.groupby('unit_nr')[to_keep].shift(lag)
+    df_train = pd.DataFrame(pf.fit_transform(df_train), columns = pf.get_feature_names_out())
+    df_test = pd.DataFrame(pf.fit_transform(df_test), columns = pf.get_feature_names_out())
     
-    df_train.dropna(inplace = True)
-    df_test.dropna(inplace = True)
+    return df_train, df_test
     
-    # selecting last instance to predict
-    df_test = df_test.groupby('unit_nr').last().reset_index(drop=True)
-
-    return df_train[to_keep + lag_features], df_test[to_keep + lag_features], df_train.rul
