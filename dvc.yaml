@@ -3,6 +3,7 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - src/01-featurize.py
+    - src/utils.py
     params:
     - featurize
     - import
@@ -26,8 +27,7 @@ stages:
     - assets/features
     - assets/models
     - src/03-evaluate.py
-    outs:
-    - assets/images
+    - src/utils.py
     metrics:
     - assets/test_metrics.json:
         cache: false

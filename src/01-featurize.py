@@ -31,7 +31,8 @@ df_train = add_rul(df_train)
 train_features, test_features, train_labels = create_features(df_train, 
                                                 df_test, 
                                                 params = params)
-
+print(train_features.shape)
+print(test_features.shape)
 #======================================================
 # Defining Labels
 #======================================================

@@ -4,8 +4,11 @@ stages:
     cmd: python src/01-featurize.py
     deps:
     - path: src/01-featurize.py
-      md5: f91febbd5dbacebf39f40199e57f7f19
-      size: 1829
+      md5: ed81abdf3e91ec38e1302bed6d22b722
+      size: 1883
+    - path: src/utils.py
+      md5: 7a63b65bbc25c0025c9548a5128cae5c
+      size: 2016
     params:
       params.yaml:
         featurize:
@@ -69,15 +72,15 @@ stages:
           rul_name: RUL_FD001.txt
     outs:
     - path: assets/features
-      md5: 590d74eddfcca6329748a16e63df134b.dir
-      size: 17384482
+      md5: df7148eac0fe1c20565954d0da44d026.dir
+      size: 17047397
       nfiles: 4
   train:
     cmd: python src/02-train.py
     deps:
     - path: assets/features
-      md5: 590d74eddfcca6329748a16e63df134b.dir
-      size: 17384482
+      md5: df7148eac0fe1c20565954d0da44d026.dir
+      size: 17047397
       nfiles: 4
     - path: src/02-train.py
       md5: 68e5342e3dfe9c9e398fb99df64385f3
@@ -92,12 +95,12 @@ stages:
           standardize: true
     outs:
     - path: assets/models
-      md5: a8f5a3f894b410fa8f179d88388815e0.dir
-      size: 9045
+      md5: 104ed2585cd9a391f870fa7a1e5affd8.dir
+      size: 8991
       nfiles: 1
     - path: assets/val_metrics.json
-      md5: 6c6bfb7addc5fb48e942481f86be3840
-      size: 107
+      md5: cfcf31d3fe95b9d965e99dd4efdf0091
+      size: 108
   evaluate:
     cmd: python src/03-evaluate.py
     deps:
@@ -110,13 +113,12 @@ stages:
       size: 8991
       nfiles: 1
     - path: src/03-evaluate.py
-      md5: fae2b93433ad215746fe029f10f097af
-      size: 1568
+      md5: e165bfead627087d7a20b8df613eef65
+      size: 1374
+    - path: src/utils.py
+      md5: 7a63b65bbc25c0025c9548a5128cae5c
+      size: 2016
     outs:
-    - path: assets/images
-      md5: d21683c956c83df791069fb678cd5c59.dir
-      size: 40442
-      nfiles: 2
     - path: assets/test_metrics.json
       md5: b32442e41dc139943d1ddb66312c9b89
       size: 106

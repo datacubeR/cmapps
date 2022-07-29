@@ -39,7 +39,7 @@ def plot_importance(model, variable_names, path = None, top_n = 10):
         plt.close()
     
 
-def create_features(df_train, df_test, params, seq_length = 4):
+def create_features(df_train, df_test, params):
     
     to_keep = params['to_keep']
     lag_features = []
@@ -54,7 +54,7 @@ def create_features(df_train, df_test, params, seq_length = 4):
     df_test.dropna(inplace = True)
     
     # selecting last instance to predict
-    df_test = df_test.groupby('unit_nr').tail(seq_length).reset_index(drop=True)
+    df_test = df_test.groupby('unit_nr').last()
 
-    return df_train[to_keep + lag_features + ['unit_nr']], df_test[to_keep + lag_features + ['unit_nr']], df_train.rul
+    return df_train[to_keep + lag_features], df_test[to_keep + lag_features], df_train.rul
     
